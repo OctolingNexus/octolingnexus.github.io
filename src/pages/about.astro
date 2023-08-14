@@ -1,46 +1,81 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import { Image } from "@astrojs/image/components";
+
+const TeamImg1 = "https://source.unsplash.com/IF9TK5Uy-KI";
+const TeamImg2 = "https://source.unsplash.com/iEEBWgY_6lA";
+const TeamImg3 = "https://source.unsplash.com/ZHvM3XIOHoE";
+
+const team = [
+  {
+    name: "Janette Lynch",
+    title: "Senior Director",
+    avatar: {
+      src: TeamImg1,
+      width: 480,
+      height: 560,
+    },
+  },
+  {
+    name: "Marcell Ziemann",
+    title: "Principal Strategist",
+    avatar: {
+      src: TeamImg2,
+      width: 580,
+      height: 580,
+    },
+  },
+  {
+    name: "Robert Palmer",
+    title: "Marketing Engineer",
+    avatar: {
+      src: TeamImg3,
+      width: 580,
+      height: 580,
+    },
+  },
+];
 ---
 
-<Layout
-	title="About Me"
-	description="The OctolingNexus About Me Page"
-	pubDate={new Date('July 26 2023')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Hi Im OctolingNeuxs im an average content creator who creates gaming content and also
-		develops things. Ive been facinated my Content Creators on youtube since i joined the
-		internet and then got into game development 6 years ago due to Garry's Mod and 
-		the source engine
-	</p>
+<Layout title="About">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">About</Fragment>
+      <Fragment slot="desc">We are a small passionate team.</Fragment>
+    </Sectionhead>
 
-	<p>
-		What made me start content Creating was watching all these other content creators play games like
-		TF2 Five nights at freddys and gmod all playing together and having fun which evidentally made me
-		want to do it too however little me couldnt do that due to having just an xbox 360 with no pc
-		back in 2015 i got my first laptop so i started my channel and my social media adventure.
-	</p>
+    <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
+      <h2 class="font-bold text-3xl text-gray-800">
+        Empowering the world with Astro.
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-500">
+        We're a multi-cultural team from around the world! We come from diverse
+        backgrounds, bringing different personalities, experiences and skills to
+        the job. This is what makes our team so special.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
+      {
+        team.map((item) => (
+          <div class="group">
+            <div class="w-full aspect-square">
+              <Image
+                {...item.avatar}
+                format="avif"
+                alt="Team"
+                class="w-full h-full object-cover rounded transition  group-hover:-translate-y-1 group-hover:shadow-xl"
+              />
+            </div>
 
-	<!---<p>
-	
-	</p>
-
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
-
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>-->
+            <div class="mt-4 text-center">
+              <h2 class="text-lg text-gray-800"> {item.name}</h2>
+              <h3 class="text-sm text-slate-500"> {item.title}</h3>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
 </Layout>
